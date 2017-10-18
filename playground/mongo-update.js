@@ -4,18 +4,18 @@ MongoClient.connect("mongodb://localhost:27017/TodoApp", (error, db) => {
         console.log('Database connection failed');
     }
     console.log("Database connected");
-    db.collection('Users').findOneAndUpdate({
-        _id: new objectID('59e6d65d0eaa2b884a1559fd')
+    db.collection('Todos').findOneAndUpdate({
+        _id: '59e5fcf10f12ee151cd5b320'
     }, {
           $set: {
-                completed: true
+            completed: false
             }
         }, {
-            returnOrignal: false
+            returnOrignal: true
         }).then((result) => {
             console.log(result);
         }, (err) => {
-            console.log(err);
+            console.log('not updated Record',err);
         });
 });
 
