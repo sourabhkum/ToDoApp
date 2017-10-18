@@ -10,13 +10,21 @@ var app = express();
 
 app.use(bobyParser.json());
 
-app.post('/todo', (req, res) => {
-    var todo=new Todo({
-        text:req.body.text,
+app.post('/todos', (req, res) => {
+    var todo = new Todo({
+        text: req.body.text,
     });
-    todo.save().then((result)=>{
+    todo.save().then((result) => {
         res.send(result);
-    },(err)=>{
+    }, (err) => {
+        res.status(400).send(err);
+    });
+});
+
+app.get('/todos', (req, res) => {
+    Todo.find().then((todos) => {
+        res.send({ todos });
+    }, (err) => {
         res.status(400).send(err);
     });
 });
@@ -24,3 +32,4 @@ app.post('/todo', (req, res) => {
 app.listen(port, () => {
     console.log(`server up on ${port}`);
 });
+module.exports = { app }
