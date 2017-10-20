@@ -19,7 +19,7 @@ User.findById(id).then((user)=>{
 console.log('something went wrong');
 });
 // var id='69e86ba63bee5e136013542a';
-// if(!ObjectID.isValid(id)){
+// if(!mongoose.Types.ObjectId.isValid(id)){
 // console.log('not valid Id');
 // }
 // Todo.find({_id:id}).then((todos)=>{

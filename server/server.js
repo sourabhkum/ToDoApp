@@ -1,3 +1,5 @@
+"use strict";
+
 var express = require('express');
 var bobyParser = require('body-parser');
 var{objectID}=require('mongodb');
@@ -8,7 +10,7 @@ var { Todo } = require('../models/todo');
 
 var port = process.env.PORT || 3000;
 var app = express();
-"use strict";
+
 app.use(bobyParser.json());
 
 app.get('/', function (req, res) {
@@ -47,6 +49,20 @@ app.get('/todos/:id',(req,res)=>{
     }).catch((err)=>{
         res.status(400).send();
     })
+});
+app.delete('/todos/:id', (req, res) => {
+    var id = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).send();
+    }
+    Todo.findByIdAndRemove(id).then((todos) => {
+        if (!todos) {
+            return res.status(404).send();
+        }
+        res.send({ todos });
+    }).catch((err) => {
+        res.status(400).send();
+    });
 });
 
 app.listen(port, () => {
