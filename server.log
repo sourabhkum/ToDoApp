@@ -108,3 +108,6 @@ Mon Oct 23 2017:DELETE/todos/59edd92004968f1fec08d72c
 Mon Oct 23 2017:DELETE/todos/59edd92004968f1fec08d72c
 Mon Oct 23 2017:DELETE/todos/59edd92004968f1fec08d72c
 Tue Oct 24 2017:POST/user
+Wed Oct 25 2017:POST/todos
+Wed Oct 25 2017:POST/todos
+Wed Oct 25 2017:GET/todos

@@ -1,5 +1,5 @@
 "use strict";
-
+require('./config/config');
 const express = require('express');
 const bobyParser = require('body-parser');
 const { objectID } = require('mongodb');
@@ -11,7 +11,7 @@ var { User } = require('../models/user');
 var { Todo } = require('../models/todo');
 var { authenticate } = require('../middleware/authenticate');
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT;
 var app = express();
 
 app.use(bobyParser.json());
@@ -53,15 +53,15 @@ app.get('/todos', authenticate, (req, res) => {
     });
 });
 
-app.get('/todos/:id',authenticate, (req, res) => {
+app.get('/todos/:id', authenticate, (req, res) => {
     var id = req.params.id;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).send({ success: false, msg: 'Todos not found' });
     }
     Todo.findOne({
-        _id:id,
-        _creator:req.user._id
-        }).then((todo) => {
+        _id: id,
+        _creator: req.user._id
+    }).then((todo) => {
         if (!todo) {
             return res.status(404).send({ success: false, msg: 'Todos not found' });
         }
@@ -70,14 +70,14 @@ app.get('/todos/:id',authenticate, (req, res) => {
         res.status(400).send({ success: false, msg: 'Bad Request', error: err });
     })
 });
-app.delete('/todos/:id',authenticate, (req, res) => {
+app.delete('/todos/:id', authenticate, (req, res) => {
     var id = req.params.id;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).send({ success: false, msg: 'Todos not found' });
     }
     Todo.findOneAndRemove({
-        _id:id,
-        _creator:req.user._id
+        _id: id,
+        _creator: req.user._id
     }).then((todos) => {
         if (!todos) {
             return res.status(404).send({ success: false, msg: 'Todos not found' });
@@ -87,7 +87,7 @@ app.delete('/todos/:id',authenticate, (req, res) => {
         res.status(400).send({ success: false, msg: 'Bad Request', error: err });
     });
 });
-app.patch('/todos/:id',authenticate, (req, res) => {
+app.patch('/todos/:id', authenticate, (req, res) => {
     var id = req.params.id;
     var body = _.pick(req.body, ['text', 'completed']);
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -99,7 +99,7 @@ app.patch('/todos/:id',authenticate, (req, res) => {
         body.completed = false;
         body.completedAt = null;
     }
-    Todo.findOneAndUpdate({_id:id,_creator:req.user._id}, { $set: body }, { new: true }).then((todo) => {
+    Todo.findOneAndUpdate({ _id: id, _creator: req.user._id }, { $set: body }, { new: true }).then((todo) => {
         if (!todo) {
             res.status(404).send({ success: false, msg: 'Todos not found' });
         }
