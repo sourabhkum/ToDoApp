@@ -3,8 +3,17 @@ const validator=require('validator');
 const jwt=require('jsonwebtoken');
 const _=require('lodash');
 const bcrypt=require('bcryptjs');
-
+const TodoSchema=require('./todo');
 var UserSchema=new mongoose.Schema({
+    name:{
+        type:String,
+        required:true
+
+    },
+    mobile:{
+        type:Number,
+        required:true
+    },
     email:{
         type:String,
         required:true,
@@ -22,6 +31,9 @@ var UserSchema=new mongoose.Schema({
         require:true,
         minlenght:6
     },
+    imageUrl  :{
+        type:String
+    },
     tokens:[{
         access:{
             type:String,
@@ -37,7 +49,7 @@ var UserSchema=new mongoose.Schema({
 UserSchema.methods.toJSON=function(){
     var user=this;
     var userObject=user.toObject();
-    return _.pick(userObject,['_id','email']);
+    return _.pick(userObject,['_id','email','name','mobile','imageUrl']);
 };
 
 UserSchema.methods.generateAuthToken=function(){
@@ -109,5 +121,6 @@ UserSchema.statics.findByCredentials=function(email,password){
 };
 var User=mongoose.model('User',UserSchema);
 module.exports={
-    User:User
+    User:User,
+    UserSchema:UserSchema
 }

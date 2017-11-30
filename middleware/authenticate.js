@@ -9,7 +9,7 @@ var authenticate=(req,res,next)=>{
         req.user=user;
         req.token=token;
         next();
-    }, (err) => {
+    }).catch((err) => {
       res.status(401).send({success:false,msg:'Auth Token Required'})
     })
 };

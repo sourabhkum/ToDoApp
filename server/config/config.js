@@ -1,15 +1,13 @@
-var env = process.env.NODE_ENV || 'development'
-if(env==='development'||env==="test"){
-    var config= require('./config.json');
-    var envConfig=config[env];
-    Object.keys(envConfig).forEach((key)=>{
-        process.env[key]=envConfig[key];
-    });
+require('dotenv').config();
+let env = process.env.NODE_ENV;
+if (env === 'development') {
+    PORT = process.env.PORT;
+    MONGO_URI = process.env.MONGO_URI;
+} else if (env === 'test') {
+    PORT = process.env.PORT;
+    MONGO_URI = process.env.MONGO_URI;
 }
-// if (env === 'development') {
-//     process.env.PORT = 3000;
-//     process.env.MONGODB_URI = 'mongodb://localhost:27017/TodoApp'
-// } else if (env === 'test') {
-//     process.env.PORT = 3000;
-//     process.env.MONGODB_URI = 'mongodb://localhost:27017/TodoApptest'
-// }
+module.exports = {
+    PORT: PORT,
+    MONGO_URI: MONGO_URI
+}
