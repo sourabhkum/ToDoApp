@@ -1,5 +1,4 @@
 node_modules
-server/config/config.json
 .env
 server.log
 server/config/config.js

@@ -11,7 +11,6 @@ var { mongoose } = require('../db/mongoose');
 var { User } = require('../models/user');
 var { Todo } = require('../models/todo');
 var { authenticate } = require('../middleware/authenticate');
-const config = require('./config/config');
 
 const port = process.env.PORT || 3000;
 var app = express();
