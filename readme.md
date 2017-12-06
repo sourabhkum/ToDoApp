@@ -40,7 +40,7 @@ x-auth:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTI3OTdmMTI4MzQ5ODE4YjBj
 <pre>
 <code>
 get:http://127.0.0.1:3000/profile
-<p>Response</p>
+Response
 {
     "user": {
         "_id": "5a2797f128349818b0c0c28c",
@@ -147,3 +147,7 @@ Response
 </code>
 </pre>
 
+<h6>Demo Link</h6>
+<pre>
+<a href="https://immense-forest-27940.herokuapp.com/">Demo URL</a>
+</pre>
