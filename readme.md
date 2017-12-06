@@ -6,9 +6,8 @@
 <code>npm install</code>
 <h1>Setup</h1>
 <p>Create .env file on root directory and add the below code</p>
-<code>MONGO_URI = mongodb://localhost:27017/TodoApp<br>
+<pre>MONGO_URI = mongodb://localhost:27017/TodoApp
     PORT = 3000<br>
-    NODE_ENV = development</code>
-</blockquote>
+    NODE_ENV = development</pre>
 <h1>Start an app</h2>
 <code>npm start</code>
